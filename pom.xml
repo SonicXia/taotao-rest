@@ -48,6 +48,7 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<!-- 配置插件 -->
 		<plugins>
@@ -61,5 +62,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	
 </project>

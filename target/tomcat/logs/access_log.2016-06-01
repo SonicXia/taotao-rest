@@ -1,3 +1,0 @@
-127.0.0.1 - - [01/Jun/2016:16:04:01 +0800] "GET / HTTP/1.1" 404 951 http-bio-8081-exec-1 38
-127.0.0.1 - - [01/Jun/2016:16:04:02 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8081-exec-2 4
-127.0.0.1 - - [01/Jun/2016:16:04:02 +0800] "GET /favicon.ico HTTP/1.1" 404 973 http-bio-8081-exec-3 1
