@@ -1,2 +1,0 @@
-0:0:0:0:0:0:0:1 - - [02/Jun/2016:17:00:14 +0800] "GET /rest/itemcat/list?callback=category.getDataService HTTP/1.1" 200 41895 http-bio-8081-exec-1 669
-0:0:0:0:0:0:0:1 - - [02/Jun/2016:17:00:26 +0800] "GET /rest/itemcat/list?callback=category.getDataService HTTP/1.1" 200 30492 http-bio-8081-exec-4 100
