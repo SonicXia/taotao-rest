@@ -3,13 +3,17 @@ package com.taotao.rest.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbItemCatMapper;
 import com.taotao.pojo.TbItemCat;
 import com.taotao.pojo.TbItemCatExample;
 import com.taotao.pojo.TbItemCatExample.Criteria;
+import com.taotao.rest.dao.JedisClient;
 import com.taotao.rest.pojo.CatNode;
 import com.taotao.rest.pojo.CatResult;
 import com.taotao.rest.service.ItemCatService;
@@ -24,13 +28,37 @@ public class ItemCatServiceImpl implements ItemCatService {
 
 	@Autowired
 	private TbItemCatMapper itemCatMapper;
+	@Autowired
+	private JedisClient jedisClient;
+	@Value("${INDEX_ITEMCAT_REDIS_KEY}")
+	private String INDEX_ITEMCAT_REDIS_KEY;
 	
 	@Override
 	public CatResult getItemCatList() {
+		//先从redis缓存中查找是否存在
+//		try {
+//			String result = jedisClient.hget(INDEX_ITEMCAT_REDIS_KEY, "");
+//			if(!StringUtils.isBlank(result)){
+//				CatResult jsonToList = JsonUtils.jsonToList(result, );
+//				
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 		
+		//若缓存中没有，则从数据库查询
 		CatResult catResult = new CatResult();
 		//查询分类列表
 		catResult.setData(getCatList(0));
+		
+		//再存入redis缓存中
+//		try {
+//			String cacheString = JsonUtils.objectToJson(catResult);
+//			jedisClient.hset(INDEX_ITEMCAT_REDIS_KEY, "", cacheString);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
 		return catResult;
 	}
 	
@@ -60,7 +88,7 @@ public class ItemCatServiceImpl implements ItemCatService {
 					catNode.setName(tbItemCat.getName());
 				}
 				catNode.setUrl("/products/"+tbItemCat.getId()+".html");
-				catNode.setItem(getCatList(tbItemCat.getId()));
+				catNode.setItem(getCatList(tbItemCat.getId()));	//递归
 				
 				resultList.add(catNode);
 				count ++;
