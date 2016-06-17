@@ -18,10 +18,22 @@ public class ItemController {
 	
 	@RequestMapping("/info/{itemId}")
 	@ResponseBody
-	public TaotaoResult getItemBaseInfo(@PathVariable long itemId){
+	public TaotaoResult getItemBaseInfo(@PathVariable Long itemId){
 		TaotaoResult result = itemService.getItemBaseInfo(itemId);
-		return result;
-		
+		return result;		
 	}
 	
+	@RequestMapping("/desc/{itemId}")
+	@ResponseBody
+	public TaotaoResult getItemDesc(@PathVariable Long itemId){
+		TaotaoResult result = itemService.getItemDesc(itemId);
+		return result;
+	}
+	
+	@RequestMapping("/param/{itemId}")
+	@ResponseBody
+	public TaotaoResult getItemParam(@PathVariable Long itemId){
+		TaotaoResult result = itemService.getItemParam(itemId);
+		return result;
+	}
 }
